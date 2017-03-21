@@ -4,18 +4,17 @@
     Add
   </button>
 </div>
-
-<ul class="heroes">
-  <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
-    <span class="badge">{{hero.id}}</span>
-    <span>{{hero.name}}</span>
-    <button class="delete" (click)="delete(hero); $event.stopPropagation()">x</button>
-  </li>
-</ul>
-
-<div *ngIf="selectedHero">
-  <h2>
-    {{selectedHero.name | uppercase}} is my hero
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
+  <div class="container">
+  <md-card class="hero-card" *ngFor="let hero of heroes" (click)="onSelect(hero)">
+    <md-card-title> {{hero.name}} </md-card-title>
+    <md-card-subtitle> {{hero.id}} </md-card-subtitle>
+    <md-card-actions>
+      <button md-icon-button (click)="gotoDetail(hero); $event.stopPropagation()">
+        <md-icon>info</md-icon>
+      </button>
+      <button md-icon-button (click)="delete(hero); $event.stopPropagation()">
+          <md-icon>delete</md-icon>
+      </button>
+    </md-card-actions>
+  </md-card>
 </div>
