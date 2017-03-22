@@ -24,14 +24,6 @@ export class HeroesComponent implements OnInit {
     this.heroService.getHeroes().subscribe(h => this.heroes = h);
   }
 
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-  }
-
-  gotoDetail(hero: Hero): void {
-    this.router.navigate(['/detail', hero.id]);
-  }
-
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }

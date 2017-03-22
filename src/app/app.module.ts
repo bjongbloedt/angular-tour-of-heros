@@ -18,6 +18,7 @@ import { HeroSearchService } from './hero-search.service';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { HeroCardComponent } from './hero-card/hero-card.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
     HeroDetailComponent,
     HeroesComponent,
     DashboardComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    HeroCardComponent
   ],
   imports: [
     BrowserModule,

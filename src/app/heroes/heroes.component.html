@@ -5,17 +5,6 @@
     Add
   </button>
 </div>
-  <div class="container">
-  <md-card class="hero-card" *ngFor="let hero of heroes" (click)="onSelect(hero)">
-    <md-card-title> {{hero.name}} </md-card-title>
-    <md-card-subtitle> {{hero.id}} </md-card-subtitle>
-    <md-card-actions>
-      <button md-icon-button (click)="gotoDetail(hero); $event.stopPropagation()">
-        <md-icon>info</md-icon>
-      </button>
-      <button md-icon-button (click)="delete(hero); $event.stopPropagation()">
-          <md-icon>delete</md-icon>
-      </button>
-    </md-card-actions>
-  </md-card>
+<div class="container">
+  <hero-card *ngFor="let hero of heroes" [hero]="hero"></hero-card>
 </div>
