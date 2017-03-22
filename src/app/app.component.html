@@ -1,6 +1,26 @@
-<md-toolbar color="primary"><span>Custom Toolbar</span></md-toolbar>
-<nav>
-  <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-  <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
-</nav>
-<router-outlet></router-outlet>
+<md-sidenav-container>
+  <md-sidenav #sidenav>
+    <md-list>
+      <md-list-item>
+        <a routerLink="/dashboard" routerLinkActive="active" (click)="sidenav.toggle()">Dashboard</a>
+      </md-list-item>
+      <md-list-item>
+        <a routerLink="/heroes" routerLinkActive="active" (click)="sidenav.toggle()">Heroes</a>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+  <md-toolbar color="primary">
+    <button md-icon-button (click)="sidenav.toggle()">
+      <md-icon>menu</md-icon>
+    </button>
+    <span>
+    {{title}}
+  </span>
+  <span class="example-fill-remaining-space"></span>
+  </md-toolbar>
+  <!-- primary content -->
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>
