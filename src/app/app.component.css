@@ -9,3 +9,11 @@ md-sidenav {
 .example-fill-remaining-space {
   flex: 1 1 auto;
 }
+
+.add-hero {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+    
+}
