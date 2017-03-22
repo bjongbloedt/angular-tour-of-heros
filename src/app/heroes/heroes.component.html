@@ -6,5 +6,5 @@
   </button>
 </div>
 <div class="container">
-  <hero-card *ngFor="let hero of heroes" [hero]="hero"></hero-card>
+  <hero-card *ngFor="let hero of heroes" [hero]="hero" (onDeleted)="onDeleted()"></hero-card>
 </div>
