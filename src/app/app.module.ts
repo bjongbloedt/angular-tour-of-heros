@@ -12,14 +12,15 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule }     from './app-routing.module';
 
-import { HeroService } from './hero.service';
-import { HeroSearchService } from './hero-search.service';
-
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
+
 import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { HeroService } from './hero.service';
+import { HeroSearchService } from './hero-search.service';
 import { HeroCardComponent } from './hero-card/hero-card.component';
+import { AddHeroDialogComponent } from './add-hero-dialog/add-hero-dialog.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HeroCardComponent } from './hero-card/hero-card.component';
     HeroesComponent,
     DashboardComponent,
     HeroSearchComponent,
-    HeroCardComponent
+    HeroCardComponent,
+    AddHeroDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import { HeroCardComponent } from './hero-card/hero-card.component';
     HeroService,
     HeroSearchService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddHeroDialogComponent]
 })
 export class AppModule { }
 

@@ -1,6 +1,10 @@
 <div class="container">
   <hero-card *ngFor="let hero of heroes" [hero]="hero" (onDeleted)="onDeleted()"></hero-card>
-  
 </div>
+
+<div class="add-hero">
+  <button md-fab (click)="openDialog()"><md-icon>add</md-icon></button>
+</div>
+
 
 

@@ -23,5 +23,4 @@ export class HeroCardComponent implements OnInit {
           this.onDeleted.emit();
         });
   }
-
 }

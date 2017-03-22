@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { Router } from "@angular/router";
+import { AddHeroDialogComponent } from '../add-hero-dialog/add-hero-dialog.component';
 
 @Component({
   selector: 'my-heroes',
@@ -11,10 +13,10 @@ import { Router } from "@angular/router";
 export class HeroesComponent implements OnInit {
 
   heroes: Hero[];
-  selectedHero: Hero;
 
   constructor(private heroService: HeroService,
-              private router: Router) { }
+              private router: Router,
+              public dialog: MdDialog) { }
 
   ngOnInit(): void {
     this.getHeros();
@@ -28,13 +30,11 @@ export class HeroesComponent implements OnInit {
     this.heroService.getHeroes().subscribe(h => this.heroes = h);
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.heroService.create(name)
-      .subscribe(hero => {
-        this.heroes.push(hero);
-        this.selectedHero = null;
-      });
+
+  openDialog() {
+    let dialogRef = this.dialog.open(AddHeroDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.heroes.push(result);
+    });
   }
 }
