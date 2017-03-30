@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { HeroCardComponent } from './hero-card/hero-card.component';
     HttpModule,
     AppRoutingModule,
     MaterialModule,
+    FlexLayoutModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   providers: [

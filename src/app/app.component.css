@@ -1,13 +1,5 @@
-.content {
-    margin: 8px;
-}
-
 md-sidenav {
   width: 200px;
-}
-
-.example-fill-remaining-space {
-  flex: 1 1 auto;
 }
 
 .add-hero {
@@ -15,5 +7,4 @@ md-sidenav {
   position: fixed;
   bottom: 20px;
   right: 20px;
-    
 }
