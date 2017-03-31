@@ -7,7 +7,7 @@ import 'hammerjs';
 import { HeroCardComponent } from './hero-card.component';
 import { HeroService } from '../hero.service';
 import { Observable } from 'rxjs/Observable';
-import { Hero } from './hero';
+import { Hero } from '../hero';
 
 
 class MockHeroService {
