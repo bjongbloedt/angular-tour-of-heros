@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 class DummyComponent {
 }
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
