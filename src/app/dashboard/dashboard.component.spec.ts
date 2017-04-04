@@ -7,7 +7,11 @@ import 'hammerjs';
 import { DashboardComponent } from './dashboard.component';
 import { HeroCardComponent } from '../hero-card/hero-card.component';
 import { HeroSearchComponent } from '../hero-search/hero-search.component';
+import { MockHeroService } from '../hero.service.mock';
 import { HeroService } from '../hero.service';
+import { MockHeroSearchService } from '../hero-search.service.mock';
+import { HeroSearchService } from '../hero-search.service';
+
 
 @Component({
   template: '<div></div>'
@@ -32,6 +36,12 @@ describe('DashboardComponent', () => {
         RouterTestingModule.withRoutes([
           { path: 'detail', component: DummyComponent }
         ])
+      ],
+      providers: [
+        { provide: HeroService, useClass: MockHeroService },
+        { provide: HeroSearchService, useClass: MockHeroSearchService },
+        HeroCardComponent,
+        HeroSearchComponent,
       ]
     })
       .compileComponents();
@@ -43,7 +53,7 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', inject([HeroService], (service: HeroService)  => {
+  it('should create', () => {
     expect(component).toBeTruthy();
-  }));
+  });
 });

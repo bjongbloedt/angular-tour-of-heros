@@ -16,7 +16,7 @@ import { MockHeroService } from '../hero.service.mock';
 class DummyComponent {
 }
 
-fdescribe('HeroCardComponent', () => {
+describe('HeroCardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HeroCardComponent, DummyComponent],
@@ -76,7 +76,6 @@ fdescribe('HeroCardComponent', () => {
       const element = fixture.debugElement;
       fixture.detectChanges();
       const attribute = element.query(By.css('button')).nativeElement.getAttribute('ng-reflect-router-link');
-
       expect(attribute).toEqual('/detail,0');
     });
 

@@ -8,4 +8,8 @@ export class MockHeroService {
   delete = jasmine.createSpy('delete').and.callFake((hero: Hero) => {
     return Observable.of({ id: 0, name: 'frank' });
   });
+
+  getHeroes = jasmine.createSpy('getHeroes').and.callFake(() => {
+    return Observable.of([{ id: 9, name: 'Dr. Fart'}]);
+  });
 }
