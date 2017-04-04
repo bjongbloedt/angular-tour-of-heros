@@ -7,17 +7,7 @@ import 'hammerjs';
 
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from '../hero.service';
-import { Observable } from 'rxjs/Observable';
-import { Hero } from '../hero';
-
-class MockHeroService {
-  getHero = jasmine.createSpy('getHero').and.callFake((id: string) => {
-    return Observable.of({ id: 1, name: 'Mr. hero' });
-  });
-  delete = jasmine.createSpy('delete').and.callFake((hero: Hero) => {
-    return Observable.of({ id: 0, name: 'frank' });
-  });
-}
+import { MockHeroService } from '../hero.service.mock';
 
 @Component({
   template: '<div></div>'
@@ -54,6 +44,7 @@ describe('HeroDetailComponent', () => {
   });
 
   it('should create', () => {
+    expect(fixture.debugElement.injector.get(HeroService).getHero).toHaveBeenCalled();
     expect(component).toBeTruthy();
   });
 });

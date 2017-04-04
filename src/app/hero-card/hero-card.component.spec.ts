@@ -1,20 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
 import { HeroCardComponent } from './hero-card.component';
 import { HeroService } from '../hero.service';
-import { Observable } from 'rxjs/Observable';
-import { Hero } from '../hero';
+import { MockHeroService } from '../hero.service.mock';
 
-
-class MockHeroService {
-  delete = jasmine.createSpy('delete').and.callFake((hero: Hero) => {
-    return Observable.of({ id: 0, name: 'frank' });
-  });
-}
 
 @Component({
   template: '<div></div>'
@@ -22,7 +16,7 @@ class MockHeroService {
 class DummyComponent {
 }
 
-describe('HeroCardComponent', () => {
+fdescribe('HeroCardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HeroCardComponent, DummyComponent],
@@ -78,13 +72,21 @@ describe('HeroCardComponent', () => {
       expect(element.querySelector('md-icon')).toBeTruthy();
     });
 
+    it('should link icon button using hero id', () => {
+      const element = fixture.debugElement;
+      fixture.detectChanges();
+      const attribute = element.query(By.css('button')).nativeElement.getAttribute('ng-reflect-router-link');
+
+      expect(attribute).toEqual('/detail,0');
+    });
+
     it('should have a delete icon', () => {
       const element = fixture.nativeElement;
       fixture.detectChanges();
       expect(element.querySelector('md-icon')).toBeTruthy();
     });
 
-    xit('should call delte when the delete icon is clicked', () => {
+    xit('should call delete when the delete icon is clicked', () => {
       expect(true).toBe(false);
     });
   });
