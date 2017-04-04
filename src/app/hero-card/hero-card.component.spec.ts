@@ -12,10 +12,7 @@ import { Hero } from '../hero';
 
 class MockHeroService {
   delete = jasmine.createSpy('delete').and.callFake((hero: Hero) => {
-    return Observable.create(observer => {
-      observer.next({id: 0, name: 'frank'});
-      observer.complete();
-    });
+    return Observable.of({ id: 0, name: 'frank' });
   });
 }
 
@@ -54,7 +51,7 @@ describe('HeroCardComponent', () => {
 
     beforeEach(() => {
       fixture = TestBed.createComponent(HeroCardComponent);
-      fixture.componentInstance.hero = {id: 0, name: 'fred'};
+      fixture.componentInstance.hero = { id: 0, name: 'fred' };
       component = fixture.componentInstance;
       fixture.detectChanges();
     });

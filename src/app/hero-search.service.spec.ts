@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
 
-fdescribe('HeroSearchService', () => {
+describe('HeroSearchService', () => {
   const heroes = [
     {id: 0, name: 'Dr. Fart'},
     {id: 1, name: 'Dr. Fart jr'}
