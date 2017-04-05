@@ -1,28 +1,39 @@
-import { TestBed, inject, async } from '@angular/core/testing';
+import { async, TestBed, inject } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
-import { HttpModule, Response, ResponseOptions } from '@angular/http';
+import { HttpModule, XHRBackend, Http } from '@angular/http';
+
 import { HeroService } from './hero.service';
-import 'rxjs/add/operator/do';
 
+fdescribe('Hero.Service', () => {
 
-describe('HeroService', () => {
-  beforeEach(() => {
+  beforeEach( async() => {
     TestBed.configureTestingModule({
-      providers: [
-        HeroService,
-      ],
       imports: [
         HttpModule
+      ],
+      providers: [
+        HeroService,
+        { provide: XHRBackend, useClass: MockBackend}
       ]
-    });
+
+
+    })
+    .compileComponents();
   });
 
-  describe('#getHeroes', () => {
-    it('should be empty', inject([HeroService], (service: HeroService, done) => {
-      service.getHeroes().do(heroes => {
-        expect(heroes).toEqual([{ id: 0, name: 'fart' }]);
-        done();
-      });
-    }));
-  });
+  it('can instantiate service when injecting http',
+    inject([HeroService], (service: HeroService) => {
+      expect(service instanceof HeroService).toBe(true);
+  }));
+
+  it('can instantiate service with "new"', inject([Http], (http: Http) => {
+    expect(http).not.toBeNull('http was null');
+    const service = new HeroService(http);
+    expect(service instanceof HeroService).toBe(true);
+  }));
+
+  it('can provide the MockBackend as XHRBackend',
+    inject([XHRBackend], (backend: XHRBackend) => {
+    expect(backend).not.toBeNull('backend was null');
+  }));
 });
