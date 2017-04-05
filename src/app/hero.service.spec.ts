@@ -11,33 +11,33 @@ import { HeroService } from './hero.service';
 import { Hero } from './hero';
 
 const makeHeroData = () => [
-  {id: 1, name: 'Windstorm'},
-  {id: 2, name: 'Bombasto'},
-  {id: 3, name: 'Magneta'},
-  {id: 4, name: 'Tornado'},
+  { id: 1, name: 'Windstorm' },
+  { id: 2, name: 'Bombasto' },
+  { id: 3, name: 'Magneta' },
+  { id: 4, name: 'Tornado' },
 ] as Hero[];
 
 describe('Hero.Service', () => {
 
-  beforeEach( async() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [
         HttpModule
       ],
       providers: [
         HeroService,
-        { provide: XHRBackend, useClass: MockBackend}
+        { provide: XHRBackend, useClass: MockBackend }
       ]
 
 
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   it('can instantiate service when injecting http',
     inject([HeroService], (service: HeroService) => {
       expect(service instanceof HeroService).toBe(true);
-  }));
+    }));
 
   it('can instantiate service with "new"', inject([Http], (http: Http) => {
     expect(http).not.toBeNull('http was null');
@@ -47,8 +47,8 @@ describe('Hero.Service', () => {
 
   it('can provide the MockBackend as XHRBackend',
     inject([XHRBackend], (backend: XHRBackend) => {
-    expect(backend).not.toBeNull('backend was null');
-  }));
+      expect(backend).not.toBeNull('backend was null');
+    }));
 
   describe('#getHeroes', () => {
     let backend: MockBackend;
@@ -60,7 +60,7 @@ describe('Hero.Service', () => {
       backend = be;
       service = new HeroService(http);
       fakeHeroes = makeHeroData();
-      const options = new ResponseOptions({status: 200, body: {data: fakeHeroes}});
+      const options = new ResponseOptions({ status: 200, body: { data: fakeHeroes } });
       response = new Response(options);
     }));
 
@@ -86,7 +86,7 @@ describe('Hero.Service', () => {
     })));
 
     it('should be ok returning no heroes', async(inject([], () => {
-      const resp = new Response(new ResponseOptions({status: 200, body: {data: []}}));
+      const resp = new Response(new ResponseOptions({ status: 200, body: { data: [] } }));
       backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
       service.getHeroes().do(heroes => {
@@ -95,7 +95,7 @@ describe('Hero.Service', () => {
     })));
 
     it('should treat 404 as an Observable error', async(inject([], () => {
-      const resp = new Response(new ResponseOptions({status: 404}));
+      const resp = new Response(new ResponseOptions({ status: 404 }));
       backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
       service.getHeroes().do(heroes => {
@@ -118,7 +118,7 @@ describe('Hero.Service', () => {
       backend = be;
       service = new HeroService(http);
       fakeHeroes = makeHeroData();
-      const options = new ResponseOptions({status: 200, body: {data: fakeHeroes[0]}});
+      const options = new ResponseOptions({ status: 200, body: { data: fakeHeroes[0] } });
       response = new Response(options);
     }));
 
@@ -148,10 +148,133 @@ describe('Hero.Service', () => {
     })));
 
     it('should treat 404 as an Observable error', async(inject([], () => {
-      const resp = new Response(new ResponseOptions({status: 404}));
+      const resp = new Response(new ResponseOptions({ status: 404 }));
       backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
       service.getHero(0).do(heroes => {
+        fail('should not response with heroes');
+      }).catch(err => {
+        expect(err).toMatch(/Bad Response Status/);
+        expect(err).toMatch(/404/);
+        return Observable.of(null);
+      }).toPromise();
+    })));
+  });
+
+  describe('#update', () => {
+    let backend: MockBackend;
+    let service: HeroService;
+    let fakeHeroes: Hero[];
+    let response: Response;
+
+    beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+      backend = be;
+      service = new HeroService(http);
+      fakeHeroes = makeHeroData();
+      const options = new ResponseOptions({ status: 200, body: { data: fakeHeroes } });
+      response = new Response(options);
+    }));
+
+    it('should send PUT request to api/heroes/:id with the correct body', async(inject([], () => {
+      let lastConnection: MockConnection;
+      backend.connections.subscribe((c: MockConnection) => {
+        lastConnection = c;
+        c.mockRespond(response);
+      });
+
+      service.update({ id: 0, name: 'Dr. Fart' }).do(hero => {
+        expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+        expect(lastConnection.request.url).toEqual('api/heroes/0');
+        expect(JSON.parse(lastConnection.request.getBody())).toEqual({ id: 0, name: 'Dr. Fart' });
+      }).toPromise();
+    })));
+
+    it('should treat 404 as an Observable error', async(inject([], () => {
+      const resp = new Response(new ResponseOptions({ status: 404 }));
+      backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+
+      service.update({ id: 0, name: 'Dr. Fart' }).do(heroes => {
+        fail('should not response with heroes');
+      }).catch(err => {
+        expect(err).toMatch(/Bad Response Status/);
+        expect(err).toMatch(/404/);
+        return Observable.of(null);
+      }).toPromise();
+    })));
+  });
+  describe('#create', () => {
+    let backend: MockBackend;
+    let service: HeroService;
+    let fakeHeroes: Hero[];
+    let response: Response;
+
+    beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+      backend = be;
+      service = new HeroService(http);
+      fakeHeroes = makeHeroData();
+      const options = new ResponseOptions({ status: 200, body: { data: fakeHeroes } });
+      response = new Response(options);
+    }));
+
+    it('should send POST request to api/heroes with the correct body', async(inject([], () => {
+      let lastConnection: MockConnection;
+      backend.connections.subscribe((c: MockConnection) => {
+        lastConnection = c;
+        c.mockRespond(response);
+      });
+
+      service.create('Dr. Fart').do(hero => {
+        expect(lastConnection.request.method).toEqual(RequestMethod.Post);
+        expect(lastConnection.request.url).toEqual('api/heroes');
+        expect(JSON.parse(lastConnection.request.getBody())).toEqual({ name: 'Dr. Fart' });
+      }).toPromise();
+    })));
+
+    it('should treat 404 as an Observable error', async(inject([], () => {
+      const resp = new Response(new ResponseOptions({ status: 404 }));
+      backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+
+      service.create('Dr. Fart').do(heroes => {
+        fail('should not response with heroes');
+      }).catch(err => {
+        expect(err).toMatch(/Bad Response Status/);
+        expect(err).toMatch(/404/);
+        return Observable.of(null);
+      }).toPromise();
+    })));
+  });
+  describe('#delete', () => {
+    let backend: MockBackend;
+    let service: HeroService;
+    let fakeHeroes: Hero[];
+    let response: Response;
+
+    beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+      backend = be;
+      service = new HeroService(http);
+      fakeHeroes = makeHeroData();
+      const options = new ResponseOptions({ status: 200, body: { data: fakeHeroes } });
+      response = new Response(options);
+    }));
+
+    it('should send DELETE request to api/heroes/:id', async(inject([], () => {
+      let lastConnection: MockConnection;
+      backend.connections.subscribe((c: MockConnection) => {
+        lastConnection = c;
+        c.mockRespond(response);
+      });
+
+      service.delete(0).do(hero => {
+        expect(lastConnection.request.method).toEqual(RequestMethod.Delete);
+        expect(lastConnection.request.url).toEqual('api/heroes/0');
+      }).toPromise();
+    })));
+
+    it('should treat 404 as an Observable error', async(inject([], () => {
+      const resp = new Response(new ResponseOptions({ status: 404 }));
+      backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+
+      service.delete(0).do(heroes => {
         fail('should not response with heroes');
       }).catch(err => {
         expect(err).toMatch(/Bad Response Status/);

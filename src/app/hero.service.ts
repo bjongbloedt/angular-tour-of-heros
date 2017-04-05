@@ -33,8 +33,9 @@ export class HeroService {
   }
 
   update(hero: Hero): Observable<Hero> {
-    const url = `$${this.heroesUrl}/${hero.id}`;
+    const url = `${this.heroesUrl}/${hero.id}`;
     return this.http.put(url, JSON.stringify(hero), {headers: this.headers})
+               .map(this.validateResponse)
                .map(() => hero)
                .catch(this.handleError);
   }
@@ -42,6 +43,7 @@ export class HeroService {
   create(name: string): Observable<Hero> {
     return this.http
       .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .map(this.validateResponse)
       .map(res => res.json().data)
       .catch(this.handleError);
   }
@@ -50,6 +52,7 @@ export class HeroService {
   delete(id: number): Observable<void> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
+      .map(this.validateResponse)
       .map(() => null)
       .catch(this.handleError);
   }
