@@ -27,6 +27,7 @@ export class HeroService {
   getHero(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get(url)
+               .map(this.validateResponse)
                .map(response => response.json().data as Hero)
                .catch(this.handleError);
   }
