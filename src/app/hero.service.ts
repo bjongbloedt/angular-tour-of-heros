@@ -32,7 +32,7 @@ export class HeroService {
                .catch(this.handleError);
   }
 
-  update(hero: Hero): Observable<Hero> {
+  updateHero(hero: Hero): Observable<Hero> {
     const url = `${this.heroesUrl}/${hero.id}`;
     return this.http.put(url, JSON.stringify(hero), {headers: this.headers})
                .map(this.validateResponse)
@@ -40,7 +40,7 @@ export class HeroService {
                .catch(this.handleError);
   }
 
-  create(name: string): Observable<Hero> {
+  createHero(name: string): Observable<Hero> {
     return this.http
       .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
       .map(this.validateResponse)
@@ -49,7 +49,7 @@ export class HeroService {
   }
 
 
-  delete(id: number): Observable<void> {
+  deleteHero(id: number): Observable<void> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .map(this.validateResponse)

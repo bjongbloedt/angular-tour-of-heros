@@ -161,7 +161,7 @@ describe('Hero.Service', () => {
     })));
   });
 
-  describe('#update', () => {
+  describe('#updateHero', () => {
     let backend: MockBackend;
     let service: HeroService;
     let fakeHeroes: Hero[];
@@ -182,7 +182,7 @@ describe('Hero.Service', () => {
         c.mockRespond(response);
       });
 
-      service.update({ id: 0, name: 'Dr. Fart' }).do(hero => {
+      service.updateHero({ id: 0, name: 'Dr. Fart' }).do(hero => {
         expect(lastConnection.request.method).toEqual(RequestMethod.Put);
         expect(lastConnection.request.url).toEqual('api/heroes/0');
         expect(JSON.parse(lastConnection.request.getBody())).toEqual({ id: 0, name: 'Dr. Fart' });
@@ -193,7 +193,7 @@ describe('Hero.Service', () => {
       const resp = new Response(new ResponseOptions({ status: 404 }));
       backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
-      service.update({ id: 0, name: 'Dr. Fart' }).do(heroes => {
+      service.updateHero({ id: 0, name: 'Dr. Fart' }).do(heroes => {
         fail('should not response with heroes');
       }).catch(err => {
         expect(err).toMatch(/Bad Response Status/);
@@ -202,7 +202,7 @@ describe('Hero.Service', () => {
       }).toPromise();
     })));
   });
-  describe('#create', () => {
+  describe('#createHero', () => {
     let backend: MockBackend;
     let service: HeroService;
     let fakeHeroes: Hero[];
@@ -223,7 +223,7 @@ describe('Hero.Service', () => {
         c.mockRespond(response);
       });
 
-      service.create('Dr. Fart').do(hero => {
+      service.createHero('Dr. Fart').do(hero => {
         expect(lastConnection.request.method).toEqual(RequestMethod.Post);
         expect(lastConnection.request.url).toEqual('api/heroes');
         expect(JSON.parse(lastConnection.request.getBody())).toEqual({ name: 'Dr. Fart' });
@@ -234,7 +234,7 @@ describe('Hero.Service', () => {
       const resp = new Response(new ResponseOptions({ status: 404 }));
       backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
-      service.create('Dr. Fart').do(heroes => {
+      service.createHero('Dr. Fart').do(heroes => {
         fail('should not response with heroes');
       }).catch(err => {
         expect(err).toMatch(/Bad Response Status/);
@@ -264,7 +264,7 @@ describe('Hero.Service', () => {
         c.mockRespond(response);
       });
 
-      service.delete(0).do(hero => {
+      service.deleteHero(0).do(hero => {
         expect(lastConnection.request.method).toEqual(RequestMethod.Delete);
         expect(lastConnection.request.url).toEqual('api/heroes/0');
       }).toPromise();
@@ -274,7 +274,7 @@ describe('Hero.Service', () => {
       const resp = new Response(new ResponseOptions({ status: 404 }));
       backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
-      service.delete(0).do(heroes => {
+      service.deleteHero(0).do(heroes => {
         fail('should not response with heroes');
       }).catch(err => {
         expect(err).toMatch(/Bad Response Status/);

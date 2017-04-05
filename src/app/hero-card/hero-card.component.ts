@@ -18,7 +18,7 @@ export class HeroCardComponent implements OnInit {
 
   delete(hero: Hero): void {
     this.heroService
-        .delete(hero.id)
+        .deleteHero(hero.id)
         .subscribe(() => {
           this.onDeleted.emit();
         });
