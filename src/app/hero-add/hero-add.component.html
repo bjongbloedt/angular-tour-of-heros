@@ -1,0 +1,9 @@
+<button (click)="goBack()">Back</button>
+<div>
+  <div>
+    <md-input-container class="example-full-width">
+        <input mdInput #heroName placeholder="Name"/>
+    </md-input-container>
+    <button md-raised-button (click)="addHero(heroName.value)">Save</button>
+  </div>
+</div>

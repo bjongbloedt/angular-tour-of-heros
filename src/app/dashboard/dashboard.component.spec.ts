@@ -11,6 +11,7 @@ import { MockHeroService } from '../hero.service.mock';
 import { HeroService } from '../hero.service';
 import { MockHeroSearchService } from '../hero-search.service.mock';
 import { HeroSearchService } from '../hero-search.service';
+import { HeroAddButtonComponent } from '../hero-add-button/hero-add-button.component';
 
 
 @Component({
@@ -29,6 +30,7 @@ describe('DashboardComponent', () => {
         DashboardComponent,
         HeroCardComponent,
         HeroSearchComponent,
+        HeroAddButtonComponent,
         DummyComponent
       ],
       imports: [

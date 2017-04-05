@@ -5,10 +5,3 @@ md-sidenav {
 .content {
   margin: 8px;
 }
-
-.add-hero {
-  display: inline-block;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-}

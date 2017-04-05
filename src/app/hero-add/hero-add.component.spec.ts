@@ -4,11 +4,9 @@ import { Component } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
-import { HeroesComponent } from './heroes.component';
+import { HeroAddComponent } from './hero-add.component';
 import { HeroService } from '../hero.service';
 import { MockHeroService } from '../hero.service.mock';
-import { HeroCardComponent } from '../hero-card/hero-card.component';
-import { HeroAddButtonComponent } from '../hero-add-button/hero-add-button.component';
 
 @Component({
   template: '<div></div>'
@@ -16,18 +14,13 @@ import { HeroAddButtonComponent } from '../hero-add-button/hero-add-button.compo
 class DummyComponent {
 }
 
-describe('HeroesComponent', () => {
-  let component: HeroesComponent;
-  let fixture: ComponentFixture<HeroesComponent>;
+describe('HeroAddComponent', () => {
+  let component: HeroAddComponent;
+  let fixture: ComponentFixture<HeroAddComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        HeroesComponent,
-        DummyComponent,
-        HeroCardComponent,
-        HeroAddButtonComponent
-      ],
+      declarations: [ HeroAddComponent, DummyComponent ],
       imports: [
         MaterialModule,
         RouterTestingModule.withRoutes([
@@ -36,14 +29,13 @@ describe('HeroesComponent', () => {
       ],
       providers: [
         { provide: HeroService, useClass: MockHeroService },
-        HeroCardComponent
       ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeroesComponent);
+    fixture = TestBed.createComponent(HeroAddComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

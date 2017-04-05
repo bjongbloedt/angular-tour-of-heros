@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class HeroesComponent implements OnInit {
 
   heroes: Hero[];
-  selectedHero: Hero;
 
   constructor(private heroService: HeroService,
               private router: Router) { }
@@ -26,15 +25,5 @@ export class HeroesComponent implements OnInit {
 
   getHeros(): void {
     this.heroService.getHeroes().subscribe(h => this.heroes = h);
-  }
-
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.heroService.createHero(name)
-      .subscribe(hero => {
-        this.heroes.push(hero);
-        this.selectedHero = null;
-      });
   }
 }
