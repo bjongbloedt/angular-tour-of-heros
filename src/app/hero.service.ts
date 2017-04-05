@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 import { Hero } from './hero';
 
 
@@ -15,6 +19,7 @@ export class HeroService {
 
   getHeroes(): Observable<Hero[]> {
     return this.http.get(this.heroesUrl)
+               .map(this.validateResponse)
                .map(response => response.json().data as Hero[])
                .catch(this.handleError);
   }
@@ -48,9 +53,15 @@ export class HeroService {
       .catch(this.handleError);
   }
 
+  private validateResponse(res: Response) {
+    if (res.status < 200 || res.status >= 300) {
+      throw new Error('Bad Response Status: ' + res.status);
+    }
+    return res;
+  }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occured', error);
-    return Promise.reject(error.message || error);
+  private handleError(error: any) {
+    const errorMessage = error.message || 'Server Error';
+    return Observable.throw(errorMessage);
   }
 }
