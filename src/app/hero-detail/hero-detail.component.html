@@ -1,11 +1,12 @@
-<button (click)="goBack()">Back</button>
 <div *ngIf="hero">
+  <button md-button (click)="goBack()">Back</button>
   <h2>{{hero.name}} details!</h2>
-  <div><label>id: </label>{{hero.id}}</div>
-  <div>
-      <label>name: </label>
-      <input [(ngModel)]="hero.name" placeholder="name"/>
-  </div>
+  <md-input-container>
+    <input mdInput placeholder="Hero Id" disabled value="{{hero.id}}">
+  </md-input-container> 
+  <md-input-container>
+    <input mdInput [(ngModel)]="hero.name" placeholder="Hero Name" value="{{hero.name}}">
+  </md-input-container> 
+  <button md-raised-button (click)="save()">Save</button>
 </div>
 
-<button (click)="save()">Save</button>
