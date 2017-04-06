@@ -1,4 +1,5 @@
 import { AngularCliProjectPage } from './app.po';
+import { browser, element, by } from 'protractor';
 
 describe('angular-cli-project App', () => {
   let page: AngularCliProjectPage;
@@ -7,8 +8,10 @@ describe('angular-cli-project App', () => {
     page = new AngularCliProjectPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display 4 heroes', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    const cardsCount = element.all(by.css('md-card')).count();
+    expect<any>(cardsCount).toBe(4, 'There should be 4 hero cards on the page');
   });
+
 });

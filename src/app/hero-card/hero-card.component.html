@@ -2,10 +2,10 @@
   <md-card-title>{{hero.name}}</md-card-title>
   <md-card-subtitle>{{hero.id}}</md-card-subtitle>
   <md-card-actions>
-    <button md-icon-button [routerLink]="['/detail', hero.id]">
+    <button md-icon-button [routerLink]="['/detail', hero.id]" data-qa="info-icon">
     <md-icon>info</md-icon>
     </button>
-    <button md-icon-button (click)="delete(hero); $event.stopPropagation()">
+    <button md-icon-button (click)="delete(hero); $event.stopPropagation()" data-qa="delete-icon">
         <md-icon>delete</md-icon>
     </button>
   </md-card-actions>
