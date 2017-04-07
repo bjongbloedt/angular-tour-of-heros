@@ -2,13 +2,20 @@
   "name": "angular-cli-project",
   "version": "0.0.0",
   "license": "MIT",
+  "config": {
+    "docker_repo": "bjongbloedt/angular-tour-of-heroes"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint --type-check",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "container:build:prod": "yarn run build && docker build -t $npm_package_docker_repo:v$npm_package_version -t $npm_package_docker_repo:latest .",
+    "container:build": "docker build -f Dockerfile.dev -t $npm_package_docker_repo:dev .",
+    "container:run:prod": "docker run -p 80:80 -d $npm_package_docker_repo:$npm_package_version",
+    "container:run": "docker run -p 4200:4200 -d $npm_package_docker_repo:dev"
   },
   "private": true,
   "dependencies": {
