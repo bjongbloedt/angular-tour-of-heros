@@ -3,6 +3,7 @@ import { AngularCliProjectPage } from './app.po';
 
 describe('A User', () => {
     let page: AngularCliProjectPage;
+    const heroesLink = element(by.linkText('Heroes'));
 
     beforeEach(() => {
         page = new AngularCliProjectPage();
@@ -16,7 +17,8 @@ describe('A User', () => {
         element(by.buttonText('Save')).click();
 
         element(by.css('md-toolbar button.mat-icon-button')).click();
-        element(by.linkText('Heroes')).click();
+        browser.wait(ExpectedConditions.visibilityOf(heroesLink));
+        heroesLink.click();
 
         const titles = element.all(by.css('md-card-title')).map(elem => {
             return elem.getText();
@@ -35,7 +37,8 @@ describe('A User', () => {
 
     it('should be able to delete a hero from the heroes list', () => {
         element(by.css('md-toolbar button.mat-icon-button')).click();
-        element(by.linkText('Heroes')).click();
+        browser.wait(ExpectedConditions.visibilityOf(heroesLink));
+        heroesLink.click();
 
         const deletedHero = element.all(by.css('md-card-title')).get(0).getText();
         element.all(by.css('md-card button[data-qa="delete-icon"]')).get(0).click();
@@ -57,7 +60,8 @@ describe('A User', () => {
 
     it('should be able to view details of a hero from the heroes list', () => {
         element(by.css('md-toolbar button.mat-icon-button')).click();
-        element(by.linkText('Heroes')).click();
+        browser.wait(ExpectedConditions.visibilityOf(heroesLink));
+        heroesLink.click();
 
         const hero = element.all(by.css('md-card-title')).get(0).getText();
         element.all(by.css('md-card button[data-qa="info-icon"]')).get(0).click();
@@ -70,7 +74,8 @@ describe('A User', () => {
 
     it('should be able to edit details of a hero from the heroes list', () => {
         element(by.css('md-toolbar button.mat-icon-button')).click();
-        element(by.linkText('Heroes')).click();
+        browser.wait(ExpectedConditions.visibilityOf(heroesLink));
+        heroesLink.click();
 
         const hero = element.all(by.css('md-card-title')).get(0).getText();
         element.all(by.css('md-card button[data-qa="info-icon"]')).get(0).click();
@@ -98,7 +103,8 @@ describe('A User', () => {
         browser.wait(ExpectedConditions.visibilityOf(element(by.css('md-card-title'))));
 
         element(by.css('md-toolbar button.mat-icon-button')).click();
-        element(by.linkText('Heroes')).click();
+        browser.wait(ExpectedConditions.visibilityOf(heroesLink));
+        heroesLink.click();
         browser.wait(ExpectedConditions.urlContains('/heroes'));
 
         const titles = element.all(by.css('md-card-title')).map(elem => {
