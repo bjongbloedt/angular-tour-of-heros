@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 
 import { HeroSearchComponent } from './hero-search.component';
@@ -24,6 +25,7 @@ describe('HeroSearchComponent', () => {
         declarations: [HeroSearchComponent, DummyComponent],
         imports: [
           MaterialModule,
+          BrowserAnimationsModule,
           RouterTestingModule.withRoutes([
             { path: 'detail', component: DummyComponent }
           ])

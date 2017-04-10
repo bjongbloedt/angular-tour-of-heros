@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 
 import { HeroAddComponent } from './hero-add.component';
@@ -23,6 +24,7 @@ describe('HeroAddComponent', () => {
       declarations: [ HeroAddComponent, DummyComponent ],
       imports: [
         MaterialModule,
+        BrowserAnimationsModule,
         RouterTestingModule.withRoutes([
           { path: 'detail', component: DummyComponent }
         ])

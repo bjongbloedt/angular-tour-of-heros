@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -43,6 +44,7 @@ import { HeroAddButtonComponent } from './hero-add-button/hero-add-button.compon
     AppRoutingModule,
     MaterialModule,
     FlexLayoutModule,
+    BrowserAnimationsModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   providers: [

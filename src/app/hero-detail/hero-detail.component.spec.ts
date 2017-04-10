@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 
 import { HeroDetailComponent } from './hero-detail.component';
@@ -25,6 +26,7 @@ describe('HeroDetailComponent', () => {
       imports: [
         MaterialModule,
         FormsModule,
+        BrowserAnimationsModule,
         RouterTestingModule.withRoutes([
           { path: 'detail', component: DummyComponent }
         ])

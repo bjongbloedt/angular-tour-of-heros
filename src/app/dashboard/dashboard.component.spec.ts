@@ -12,6 +12,7 @@ import { HeroService } from '../hero.service';
 import { MockHeroSearchService } from '../hero-search.service.mock';
 import { HeroSearchService } from '../hero-search.service';
 import { HeroAddButtonComponent } from '../hero-add-button/hero-add-button.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @Component({
@@ -35,6 +36,7 @@ describe('DashboardComponent', () => {
       ],
       imports: [
         MaterialModule,
+        BrowserAnimationsModule,
         RouterTestingModule.withRoutes([
           { path: 'detail', component: DummyComponent }
         ])
