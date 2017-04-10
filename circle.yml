@@ -1,0 +1,13 @@
+machine:
+  node:
+    version: v6.10.2
+dependencies:
+  override:
+    - yarn
+general:
+  artifacts:
+    - coverage/
+test:
+  override:
+    - yarn test -- --single-run --code-coverage
+    - yarn run e2e
