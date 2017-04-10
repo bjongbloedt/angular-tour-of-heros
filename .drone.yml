@@ -1,6 +1,0 @@
-pipeline:
-  frontend:
-    image: node:6.10.2-alpine
-    commands:
-      - yarn
-      - yarn test -- --single-run --code-coverage
