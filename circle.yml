@@ -16,4 +16,7 @@ general:
 test:
   override:
     - yarn test -- --single-run --code-coverage
+        environment:
+          JUNIT_REPORT_PATH: $CIRCLE_TEST_REPORTS/junit/
+          JUNIT_REPORT_NAME: test-results.xml
     - yarn run e2e
