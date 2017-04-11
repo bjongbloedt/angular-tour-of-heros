@@ -39,6 +39,30 @@ describe('HeroCardComponent', () => {
     expect(app).toBeTruthy();
   }));
 
+  describe('#delete', () => {
+    let component: HeroCardComponent;
+    let fixture: ComponentFixture<HeroCardComponent>;
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(HeroCardComponent);
+      fixture.componentInstance.hero = { id: 0, name: 'fred' };
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should delete a given hero', () => {
+      const hero = { id: 4, name: 'fritz' };
+      const heroService = fixture.debugElement.injector.get(HeroService);
+      const eventSpy = spyOn(component.onDeleted, 'emit');
+
+      component.delete(hero);
+
+      expect(heroService.deleteHero).toHaveBeenCalledWith(hero.id);
+      expect(eventSpy).toHaveBeenCalled();
+    });
+
+  });
+
   describe('card', () => {
     let component: HeroCardComponent;
     let fixture: ComponentFixture<HeroCardComponent>;
@@ -85,8 +109,17 @@ describe('HeroCardComponent', () => {
       expect(element.querySelector('md-icon')).toBeTruthy();
     });
 
-    xit('should call delete when the delete icon is clicked', () => {
-      expect(true).toBe(false);
+    it('should call delete when the delete icon is clicked', () => {
+      const heroService = fixture.debugElement.injector.get(HeroService);
+      const eventSpy = spyOn(component.onDeleted, 'emit');
+
+      const element = fixture.nativeElement;
+      fixture.detectChanges();
+      element.querySelector('button[data-qa="delete-icon"]').click();
+      fixture.detectChanges();
+
+      expect(heroService.deleteHero).toHaveBeenCalledWith(fixture.componentInstance.hero.id);
+      expect(eventSpy).toHaveBeenCalled();
     });
   });
 });
