@@ -20,3 +20,9 @@ test:
           JUNIT_REPORT_PATH: $CIRCLE_TEST_REPORTS/junit/
           JUNIT_REPORT_NAME: test-results.xml
     - yarn run e2e
+deployment:
+  production:
+    branch: master
+    commands:
+      - yarn run build
+      - firebase deploy --token=$FIREBASE_TOKEN --non-interactive
