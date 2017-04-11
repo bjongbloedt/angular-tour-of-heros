@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "angular-tour-of-heroes-46799",
-    "production": "angular-tour-of-heroes-46799"
+    "default": "angular-tour-of-heroes-staging",
+    "production": "angular-tour-of-heroes-46799",
+    "staging": "angular-tour-of-heroes-staging"
   }
 }
