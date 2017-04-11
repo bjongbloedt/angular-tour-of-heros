@@ -2,7 +2,7 @@ import { browser, element, by } from 'protractor';
 import { AppPage } from './app.po';
 
 export class AddHeroPage extends AppPage {
-    nameTextbox = element(by.css('input[placeholder="Name"]'));
+    nameTextbox = element(by.css('input[placeholder="Hero Name"]'));
     saveButton = element(by.buttonText('Save'));
 
     navigateTo() {

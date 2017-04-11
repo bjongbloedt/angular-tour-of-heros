@@ -8,7 +8,6 @@ import { HeroesComponent } from './heroes.component';
 import { HeroService } from '../hero.service';
 import { MockHeroService } from '../hero.service.mock';
 import { HeroCardComponent } from '../hero-card/hero-card.component';
-import { HeroAddButtonComponent } from '../hero-add-button/hero-add-button.component';
 
 @Component({
   template: '<div></div>'
@@ -26,7 +25,6 @@ describe('HeroesComponent', () => {
         HeroesComponent,
         DummyComponent,
         HeroCardComponent,
-        HeroAddButtonComponent
       ],
       imports: [
         MaterialModule,

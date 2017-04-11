@@ -7,5 +7,5 @@ export class AppPage {
     heroCardTitles = element.all(by.css('md-card-title'));
     heroCardDeleteIcons = element.all(by.css('md-card button[data-qa="delete-icon"]'));
     heroCardInfoIcons = element.all(by.css('md-card button[data-qa="info-icon"]'));
-
+    addHeroButton = element(by.css('div.add-hero'));
 }

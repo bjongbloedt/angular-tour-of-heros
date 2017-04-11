@@ -1,5 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HeroAddButtonComponent } from './hero-add-button/hero-add-button.component';
 import { Component } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
@@ -17,7 +18,8 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        DummyComponent
+        DummyComponent,
+        HeroAddButtonComponent
       ],
       imports: [
         MaterialModule,
