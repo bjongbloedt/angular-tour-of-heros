@@ -12,7 +12,7 @@ dependencies:
 general:
   artifacts:
     - coverage/
-    - junit/test-results.xml
+    - $CIRCLE_TEST_REPORTS/junit/test-results.xml
 test:
   override:
     - yarn test -- --single-run --code-coverage
