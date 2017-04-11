@@ -12,7 +12,6 @@ import { MockHeroService } from '../hero.service.mock';
 import { HeroService } from '../hero.service';
 import { MockHeroSearchService } from '../hero-search.service.mock';
 import { HeroSearchService } from '../hero-search.service';
-import { HeroAddButtonComponent } from '../hero-add-button/hero-add-button.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -32,7 +31,6 @@ describe('DashboardComponent', () => {
         DashboardComponent,
         HeroCardComponent,
         HeroSearchComponent,
-        HeroAddButtonComponent,
         DummyComponent
       ],
       imports: [
