@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HeroService } from '../hero.service';
 import { Location } from '@angular/common';
 
@@ -7,13 +7,10 @@ import { Location } from '@angular/common';
   templateUrl: './hero-add.component.html',
   styleUrls: ['./hero-add.component.css']
 })
-export class HeroAddComponent implements OnInit {
+export class HeroAddComponent {
 
   constructor(private heroService: HeroService,
               private location: Location) { }
-
-  ngOnInit() {
-  }
 
   addHero(name: string): void {
     name = name.trim();

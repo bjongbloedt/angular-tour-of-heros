@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
 import { MaterialModule } from '@angular/material';
+import { Location } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 
@@ -44,5 +45,55 @@ describe('HeroAddComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('#addHero', () => {
+    it('should do nothing if empty string is given', () => {
+      const heroService = fixture.debugElement.injector.get(HeroService);
+      const loc = fixture.debugElement.injector.get(Location);
+      const spy = spyOn(loc, 'back').and.callThrough();
+
+      component.addHero('');
+
+      expect(heroService.createHero).not.toHaveBeenCalled();
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should do nothing if whitespace is given', () => {
+      const heroService = fixture.debugElement.injector.get(HeroService);
+      const loc = fixture.debugElement.injector.get(Location);
+      const spy = spyOn(loc, 'back').and.callThrough();
+
+      component.addHero('    ');
+
+      expect(heroService.createHero).not.toHaveBeenCalled();
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should create new hero and go back', () => {
+      const fakeHero = 'Papa Smurf';
+      const heroService = fixture.debugElement.injector.get(HeroService);
+      const loc = fixture.debugElement.injector.get(Location);
+      const spy = spyOn(loc, 'back').and.callThrough();
+
+      component.addHero(fakeHero);
+
+      expect(heroService.createHero).toHaveBeenCalled();
+      expect(heroService.createHero).toHaveBeenCalledWith(fakeHero);
+      expect(spy).toHaveBeenCalled();
+    });
+
+    xit('should not go back if create hero returns an error', () => {
+
+    });
+  });
+
+  describe('#goback', () => {
+    it('should call location back', () => {
+      const loc = fixture.debugElement.injector.get(Location);
+      const spy = spyOn(loc, 'back').and.callThrough();
+      component.goBack();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
   });
 });
