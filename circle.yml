@@ -15,7 +15,7 @@ general:
     - $CIRCLE_TEST_REPORTS/junit/test-results.xml
 test:
   override:
-    - yarn test -- --single-run --code-coverage
+    - yarn test -- --single-run --code-coverage:
         environment:
           JUNIT_REPORT_PATH: $CIRCLE_TEST_REPORTS/junit/
           JUNIT_REPORT_NAME: test-results.xml
