@@ -1,12 +1,13 @@
 <div class="hero-add">
   <h2>Add a new Hero</h2>
-  <div>
+  <form [formGroup]="form" (ngSubmit)="addHero(form.value, form.valid)" >
     <md-input-container class="example-full-width">
-        <input mdInput #heroName placeholder="Hero Name"/>
+        <input mdInput formControlName="name" placeholder="Hero Name"/>
+        <md-error>Name is required</md-error>
     </md-input-container>
     <div>
-      <button md-button (click)="goBack()">Back</button>
-      <button md-raised-button (click)="addHero(heroName.value)">Save</button>
+      <button md-button (click)="goBack()" type="button">Back</button>
+      <button md-raised-button type="submit">Save</button>
     </div>
-  </div>
+  </form>
 </div>

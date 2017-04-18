@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HeroService } from '../hero.service';
 import { Location } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Hero } from '../hero';
 
 @Component({
   selector: 'hero-add',
@@ -8,13 +10,21 @@ import { Location } from '@angular/common';
   styleUrls: ['./hero-add.component.css']
 })
 export class HeroAddComponent {
+  form: FormGroup;
 
   constructor(private heroService: HeroService,
-              private location: Location) { }
+              private location: Location,
+              private formBuilder: FormBuilder) {
 
-  addHero(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
+                this.form = formBuilder.group({
+                  name: ['', Validators.required]
+                });
+               }
+
+  addHero(model: Hero, valid: boolean): void {
+    console.log(valid);
+    if (!valid) { return; }
+    const name = model.name.trim();
     this.heroService.createHero(name)
       .subscribe(hero => {
         this.goBack();

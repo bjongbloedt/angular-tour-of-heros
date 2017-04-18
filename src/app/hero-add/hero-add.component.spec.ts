@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { Location } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'hammerjs';
 
 import { HeroAddComponent } from './hero-add.component';
@@ -25,6 +26,8 @@ describe('HeroAddComponent', () => {
       declarations: [ HeroAddComponent, DummyComponent ],
       imports: [
         MaterialModule,
+        ReactiveFormsModule,
+        FormsModule,
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes([
           { path: 'detail', component: DummyComponent }
@@ -53,7 +56,7 @@ describe('HeroAddComponent', () => {
       const loc = fixture.debugElement.injector.get(Location);
       const spy = spyOn(loc, 'back').and.callThrough();
 
-      component.addHero('');
+      component.addHero({ name: 'larry', id: 5 }, false);
 
       expect(heroService.createHero).not.toHaveBeenCalled();
       expect(spy).not.toHaveBeenCalled();
@@ -64,22 +67,22 @@ describe('HeroAddComponent', () => {
       const loc = fixture.debugElement.injector.get(Location);
       const spy = spyOn(loc, 'back').and.callThrough();
 
-      component.addHero('    ');
+      component.addHero({ name: '   ', id: 5 } , false);
 
       expect(heroService.createHero).not.toHaveBeenCalled();
       expect(spy).not.toHaveBeenCalled();
     });
 
     it('should create new hero and go back', () => {
-      const fakeHero = 'Papa Smurf';
+      const fakeHero = { name: 'Papa Smurf', id: 6 };
       const heroService = fixture.debugElement.injector.get(HeroService);
       const loc = fixture.debugElement.injector.get(Location);
       const spy = spyOn(loc, 'back').and.callThrough();
 
-      component.addHero(fakeHero);
+      component.addHero(fakeHero, true);
 
       expect(heroService.createHero).toHaveBeenCalled();
-      expect(heroService.createHero).toHaveBeenCalledWith(fakeHero);
+      expect(heroService.createHero).toHaveBeenCalledWith(fakeHero.name);
       expect(spy).toHaveBeenCalled();
     });
 
