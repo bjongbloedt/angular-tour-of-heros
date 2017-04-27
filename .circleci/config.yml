@@ -35,9 +35,6 @@ jobs:
 
               echo "Installing firebase-tools"
               npm install -g firebase-tools
-
-              echo "Installing firebase-functions"
-              cd ./functions && npm install && cd ..
             fi
 
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
