@@ -1,0 +1,53 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+    docker:
+      - image: node:boron
+      - image: selenium/standalone-chrome:3.4.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: heroes-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - save_cache:
+          key: heroes-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - "./node_modules"
+      - run:
+          name: Run Unit Tests
+          command: yarn test -- --single-run --code-coverage
+      - store_artifacts:
+          path: ~/app/artifacts
+      - store_artifacts:
+          path: ~/app/coverage
+      - run:
+          name: Run e2e Tests
+          command: yarn run e2e
+      - deploy:
+          name: Deploy
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ] || git log -1 --pretty=%s | grep -E "[0-9]+(.[0-9]+)+"; then
+              echo "Building for Deployment"
+              yarn run build
+
+              echo "Installing firebase-tools"
+              npm install -g firebase-tools
+
+              echo "Installing firebase-functions"
+              cd ./functions && npm install && cd ..
+            fi
+
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo "Deploying to staging environment."
+              firebase use staging
+              firebase deploy --token "$FIREBASE_TOKEN"
+            fi
+
+            if git log -1 --pretty=%s | grep -E "[0-9]+(.[0-9]+)+"; then
+              echo "Deploying to production environment."
+              firebase use production
+              firebase deploy --token "$FIREBASE_TOKEN"
+            fi
