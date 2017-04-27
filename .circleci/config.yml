@@ -19,13 +19,13 @@ jobs:
       - run:
           name: Run Unit Tests
           command: yarn test -- --single-run --code-coverage --browsers=chrome-ci
-      - store_artifacts:
+      - store_test_results:
           path: ~/app/artifacts
       - store_artifacts:
           path: ~/app/coverage
       - run:
           name: Run e2e Tests
-          command: yarn run e2e
+          command: yarn run e2e -- --config config/protractor.ci.conf.js
       - deploy:
           name: Deploy
           command: |
