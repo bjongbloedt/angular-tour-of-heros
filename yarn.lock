@@ -2702,6 +2702,13 @@ jasmine-core@~2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.5.2.tgz#6f61bd79061e27f43e6f9355e44b3c6cab6ff297"
 
+jasmine-reporters@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/jasmine-reporters/-/jasmine-reporters-2.2.1.tgz#de9a9201367846269e7ca8adff5b44221671fcbd"
+  dependencies:
+    mkdirp "^0.5.1"
+    xmldom "^0.1.22"
+
 jasmine-spec-reporter@~3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/jasmine-spec-reporter/-/jasmine-spec-reporter-3.2.0.tgz#fdbe85a80ccdd3b276746bc77fde83c1ce773eff"
@@ -5472,7 +5479,7 @@ xmlbuilder@^4.1.0:
   dependencies:
     lodash "^4.0.0"
 
-xmldom@^0.1.19:
+xmldom@^0.1.19, xmldom@^0.1.22:
   version "0.1.27"
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
 
