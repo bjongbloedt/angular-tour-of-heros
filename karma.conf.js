@@ -11,7 +11,8 @@ module.exports = function (config) {
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma'),
-      require('karma-junit-reporter')
+      require('karma-junit-reporter'),
+      require('karma-webdriver-launcher')
     ],
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
@@ -33,6 +34,16 @@ module.exports = function (config) {
         lines: 93,
         branches: 72,
         functions: 86
+      }
+    },
+    customLaunchers: {
+      'chrome-ci': {
+        base: 'WebDriver',
+        browserName: 'chrome',
+        config: {
+          hostname: 'localhost',
+          port: 4444
+        }
       }
     },
     angularCli: {

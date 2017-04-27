@@ -18,7 +18,7 @@ jobs:
             - "./node_modules"
       - run:
           name: Run Unit Tests
-          command: yarn test -- --single-run --code-coverage
+          command: yarn test -- --single-run --code-coverage --browsers=chrome-ci
       - store_artifacts:
           path: ~/app/artifacts
       - store_artifacts:
