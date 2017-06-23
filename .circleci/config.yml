@@ -26,6 +26,9 @@ jobs:
           command: yarn run e2e -- --config config/protractor.ci.conf.js --webdriver-update false
       - store_test_results:
           path: ~/app/artifacts
+      - run:
+          name: Codecov
+          command: bash <(curl -s https://codecov.io/bash)
       - deploy:
           name: Deploy
           command: |
